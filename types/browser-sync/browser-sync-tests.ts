@@ -185,6 +185,17 @@ browserSync({
 });
 
 browserSync({
+    proxy: {
+        target: "http://yourlocal.dev",
+        error: function (err, bs) {
+            if(err) {
+                console.log(err);
+            }
+        }
+    }
+})
+
+browserSync({
     proxy: "https://yourlocal.dev",
     https: {
         key: "./path/to/the/key/file.key",

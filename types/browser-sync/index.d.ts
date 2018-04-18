@@ -361,8 +361,11 @@ declare namespace browserSync {
         middleware?: MiddlewareHandler;
         ws?: boolean;
         reqHeaders?: (config: any) => Hash<any>;
-        proxyRes?: ((res: http.ServerResponse, req: http.IncomingMessage, next: Function) => any)[] | ((res: http.ServerResponse, req: http.IncomingMessage, next: Function) => any);
+        proxyRes?:
+            ((proxyRes: http.IncomingMessage, res: http.ServerResponse, req: http.IncomingMessage) => any) | ((res: http.ServerResponse) => any) |
+            (((proxyRes: http.IncomingMessage, res: http.ServerResponse, req: http.IncomingMessage) => any) | ((res: http.ServerResponse) => any))[];
         proxyReq?: ((res: http.ServerRequest) => any)[] | ((res: http.ServerRequest) => any);
+        error?: (err: NodeJS.ErrnoException, req: http.IncomingMessage, res: http.ServerResponse) => void;
     }
 
     interface HttpsOptions {
